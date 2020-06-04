@@ -1,0 +1,10 @@
+{
+  "name": "crawler",
+  "version": "1.0.0",
+  "description": "Crawler framework for FPV Sites",
+  "main": "handler.js",
+  "license": "MIT",
+  "dependencies": {
+    "fast-xml-parser": "^3.17.3"
+  }
+}
