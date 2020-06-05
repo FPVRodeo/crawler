@@ -10,10 +10,9 @@ module.exports.crawl = (event, context, callback) => {
 
 };
 
-const hobbyrcCrawler = require('./crawlers/hobbyrc/crawler.js');
-const hobbyrc = new hobbyrcCrawler();
+const HobbyRcCrawler = require('./crawlers/hobbyrc/crawler.js');
+const hobbyrc = new HobbyRcCrawler();
 hobbyrc.startCrawl().then((data) => {
-    console.log(data.urlset.url[0]);
     /* Schema from above
     {
       loc: 'https://www.hobbyrc.co.uk/popular-manufacturers',
@@ -21,6 +20,12 @@ hobbyrc.startCrawl().then((data) => {
       lastmod: '2015-04-28'
     }
      */
+    const urls = data.urlset.url;
+
+    urls.map(value => {
+        console.log(value.loc);
+    });
+    console.log(`Total URLs to parse ${urls.length}`)
 }).catch((error) => {
     console.log(error);
 });
