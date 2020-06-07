@@ -1,5 +1,8 @@
 'use strict';
 
+const HobbyRcCrawler = require('./crawlers/hobbyrc/crawler');
+const HobbyRcScraper = require('./crawlers/hobbyrc/scraper');
+
 // TODO: Break these to their own functions?
 
 module.exports.parse = (event, context, callback) => {
@@ -10,22 +13,20 @@ module.exports.crawl = (event, context, callback) => {
 
 };
 
-const HobbyRcCrawler = require('./crawlers/hobbyrc/crawler.js');
-const hobbyrc = new HobbyRcCrawler();
-hobbyrc.startCrawl().then((data) => {
-    /* Schema from above
-    {
-      loc: 'https://www.hobbyrc.co.uk/popular-manufacturers',
-      changefreq: 'weekly',
-      lastmod: '2015-04-28'
-    }
-     */
-    const urls = data.urlset.url;
-
-    urls.map(value => {
-        console.log(value.loc);
+/*const hobbyrc = new HobbyRcCrawler();
+hobbyrc.fetchUrls().then((urls) => {
+    urls.map(url => {
+        console.log(url.loc);
     });
-    console.log(`Total URLs to parse ${urls.length}`)
+    console.error(`Total URLs to parse ${urls.length}`)
 }).catch((error) => {
-    console.log(error);
+    console.error('An Error has occurred');
+    console.error(error);
+});*/
+
+const hobbyrcScrape = new HobbyRcScraper();
+hobbyrcScrape.getProduct('https://www.hobbyrc.co.uk/jumper-t16-pro-transmitter-with-hall-sensor-gimbals').then((data) => {
+   console.log(data);
+}).catch((error) => {
+   console.error(error);
 });
