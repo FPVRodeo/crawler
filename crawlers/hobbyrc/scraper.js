@@ -30,7 +30,10 @@ class HobbyRcScraper {
                 });
 
                 product.name = props.name[0].trim();
-                product.price = price;
+                product.price_metadata = price;
+                product.price1_value = price[0].price;
+                product.price1_currency = price[0].currency;
+                product.price1_type = 'main';
                 product.url = url;
                 product.source = 'hobbyrc';
                 product.images = props.image;

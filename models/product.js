@@ -1,7 +1,10 @@
 class Product {}
 
 Product.prototype.name        = null;
-Product.prototype.price       = null;
+Product.prototype.price_metadata       = null;
+Product.prototype.price1_value = null;
+Product.prototype.price1_currency = null;
+Product.prototype.price1_type = null;
 Product.prototype.images       = null;
 Product.prototype.category_metadata = null;
 Product.prototype.description = null;

@@ -26,25 +26,36 @@ hobbyrc.fetchUrls().then((urls) => {
 });*/
 
 const hobbyrcScrape = new HobbyRcScraper();
-hobbyrcScrape.getProduct('https://www.hobbyrc.co.uk/emax-rs2205-2300kv-red-bottom-racespec-motor').then((data) => {
-   // console.log(data);
-   const appSearch = axios.create({
-      headers: {
-          'Authorization': 'Bearer [redacted]',
-          'Content-type': 'application/json',
-      },
-   }).post('http://localhost:3002/api/as/v1/engines/fpv-rodeo/documents', JSON.stringify(data))
-       .then((response) => {
-         console.log(response);
-         console.log(response.status);
-         console.log(response.data);
-      })
-       .catch((response) => {
-           console.log(response);
-           console.log(response.status);
-           console.log(response.data);
-           console.log('RESPONSE DATA',response.response);
-       });
-}).catch((error) => {
-   console.error(error);
-});
+[
+    'https://www.hobbyrc.co.uk/jumper-t16-pro-transmitter-with-hall-sensor-gimbals',
+    'https://www.hobbyrc.co.uk/emax-rs2205-2300kv-red-bottom-racespec-motor',
+    'https://www.hobbyrc.co.uk/hobbywing-xrotor-race-pro-2306-2700kv',
+    'https://www.hobbyrc.co.uk/tbs-crossfire-nano-receiver-special-edition-5-pack',
+    'https://www.hobbyrc.co.uk/tbs-crossfire-nano-receiver-special-edition',
+    'https://www.hobbyrc.co.uk/armattan-badger-5-dji-edition-frame',
+    'https://www.hobbyrc.co.uk/iflight-titan-dc5-5-fpv-frame-for-dji-air-unit',
+    'https://www.hobbyrc.co.uk/frsky-xm-plus-eu-lbt-16ch-tiny-receiver-with-sbus',
+].forEach((value => {
+    hobbyrcScrape.getProduct(value).then((data) => {
+        // console.log(data);
+        const appSearch = axios.create({
+            headers: {
+                'Authorization': 'Bearer [redacted]',
+                'Content-type': 'application/json',
+            },
+        }).post('http://localhost:3002/api/as/v1/engines/fpv-rodeo/documents', JSON.stringify(data))
+            .then((response) => {
+                // console.log(response);
+                console.log(value, response.status);
+                // console.log(response.data);
+            })
+            .catch((response) => {
+                // console.log(response);
+                console.log(value, response.status);
+                // console.log(response.data);
+                console.log('RESPONSE DATA',response.response);
+            });
+    }).catch((error) => {
+        console.error(error);
+    });
+}));
