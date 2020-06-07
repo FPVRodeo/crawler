@@ -31,11 +31,13 @@ class HobbyRcScraper {
 
                 product.name = props.name[0].trim();
                 product.price = price;
-                product.image = props.image;
+                product.url = url;
+                product.source = 'hobbyrc';
+                product.images = props.image;
                 product.description = props.description[0].trim();
             }
         });
-        product.categoryMetadata = categoryMetadata;
+        product.category_metadata = categoryMetadata;
 
         return product;
     }
