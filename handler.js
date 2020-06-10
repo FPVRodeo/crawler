@@ -1,8 +1,8 @@
 'use strict';
 
 const HobbyRcCrawler = require('./crawlers/hobbyrc/crawler');
+const UmtCrawler = require('./crawlers/umt/crawler');
 const HobbyRcScraper = require('./crawlers/hobbyrc/scraper');
-const axios = require('axios').default;
 
 // TODO: Break these to their own functions?
 
@@ -14,9 +14,21 @@ module.exports.crawl = (event, context, callback) => {
 
 };
 
+const umt = new UmtCrawler();
+umt.fetchUrls().then((urls) => {
+    urls.forEach((url) => {
+       console.log(url);
+    });
+
+    console.log(`Total Urls: ${urls.length}`);
+}).catch((error) => {
+    console.error('An Error has occurred');
+    console.error(error);
+});
+
 /*const hobbyrc = new HobbyRcCrawler();
 hobbyrc.fetchUrls().then((urls) => {
-    urls.map(url => {
+    urls.forEach(url => {
         console.log(url.loc);
     });
     console.error(`Total URLs to parse ${urls.length}`)
@@ -25,7 +37,7 @@ hobbyrc.fetchUrls().then((urls) => {
     console.error(error);
 });*/
 
-const hobbyrcScrape = new HobbyRcScraper();
+/*const hobbyrcScrape = new HobbyRcScraper();
 [
     'https://www.hobbyrc.co.uk/jumper-t16-pro-transmitter-with-hall-sensor-gimbals',
     'https://www.hobbyrc.co.uk/emax-rs2205-2300kv-red-bottom-racespec-motor',
@@ -58,4 +70,4 @@ const hobbyrcScrape = new HobbyRcScraper();
     }).catch((error) => {
         console.error(error);
     });
-}));
+}));*/

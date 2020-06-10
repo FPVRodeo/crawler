@@ -1,10 +1,10 @@
-const parser = require('fast-xml-parser');
-const axios = require('axios').default;
+const BaseSitemapCrawler = require('../BaseSitemapCrawler');
 
-class HobbyRcCrawler {
+class HobbyRcCrawler extends BaseSitemapCrawler{
     constructor() {
-        // super(props);
-        this.sitemap = 'https://www.hobbyrc.co.uk/sitemap.xml';
+        super({
+            sitemap: 'https://www.hobbyrc.co.uk/sitemap.xml'
+        });
     }
 
     async fetchUrls() {
@@ -15,21 +15,8 @@ class HobbyRcCrawler {
           lastmod: '2015-04-28'
         }
          */
-        const sitemap = await this._startCrawl();
+        const sitemap = await this._startCrawl(this.sitemap);
         return sitemap.urlset.url;
-    }
-
-    async _startCrawl() {
-        const response = await this._fetchData();
-        if (parser.validate(response.data) !== true) {
-            console.error('DATA INVALID!');
-            throw new Error('DATA INVALID');
-        }
-        return parser.parse(response.data);
-    }
-
-    async _fetchData() {
-        return await axios.get(this.sitemap);
     }
 }
 
