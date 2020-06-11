@@ -1,8 +1,9 @@
 'use strict';
 
 const HobbyRcCrawler = require('./crawlers/hobbyrc/crawler');
-const UmtCrawler = require('./crawlers/umt/crawler');
 const HobbyRcScraper = require('./crawlers/hobbyrc/scraper');
+const UmtCrawler = require('./crawlers/umt/crawler');
+const UmtScraper = require('./crawlers/umt/scraper');
 
 // TODO: Break these to their own functions?
 
@@ -14,7 +15,19 @@ module.exports.crawl = (event, context, callback) => {
 
 };
 
-const umt = new UmtCrawler();
+const UMTScrape = new UmtScraper();
+[
+    'https://www.unmannedtechshop.co.uk/product/lumenier-micro-axii-stubby-mmcx-5-8ghz-antenna/?attribute_pa_antenna-polarisation=rhcp',
+    'https://www.unmannedtechshop.co.uk/product/jumper-t16-plus-radio-transmitter/',
+].forEach((url) => {
+    UMTScrape.getProduct(url).then((product) => {
+        console.log(product);
+    }).catch((error) => {
+       console.error('An Error has occurred') ;
+       console.error(error);
+    });
+});
+/*const umt = new UmtCrawler();
 umt.fetchUrls().then((urls) => {
     urls.forEach((url) => {
        console.log(url);
@@ -24,7 +37,7 @@ umt.fetchUrls().then((urls) => {
 }).catch((error) => {
     console.error('An Error has occurred');
     console.error(error);
-});
+});*/
 
 /*const hobbyrc = new HobbyRcCrawler();
 hobbyrc.fetchUrls().then((urls) => {

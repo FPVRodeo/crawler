@@ -1,7 +1,7 @@
 const BaseScraper = require('../BaseScraper');
 const Product = require('../../models/product');
 
-class HobbyRcScraper extends BaseScraper{
+class HobbyRcScraper extends BaseScraper {
     constructor() {
         super({
             type: 'microdata'
