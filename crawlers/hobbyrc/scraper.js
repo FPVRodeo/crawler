@@ -1,12 +1,11 @@
-const axios = require('axios').default;
-const scraper = require('html-metadata').parseSchemaOrgMicrodata;
-const cheerio = require('cheerio');
+const BaseScraper = require('../BaseScraper');
 const Product = require('../../models/product');
 
-class HobbyRcScraper {
+class HobbyRcScraper extends BaseScraper{
     constructor() {
-        // super(props)
-        this.type = 'microdata';
+        super({
+            type: 'microdata'
+        });
     }
 
     async getProduct(url) {
@@ -45,15 +44,6 @@ class HobbyRcScraper {
         return product;
     }
 
-    async _scrapeUrl(url) {
-        const response = await this._fetchData(url);
-        const $ = cheerio.load(response.data);
-        return await scraper($);
-    }
-
-    async _fetchData(url) {
-        return await axios.get(url);
-    }
 }
 
 module.exports = HobbyRcScraper;
