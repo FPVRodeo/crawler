@@ -14,6 +14,6 @@ Some SRCs https://www.facebook.com/DroneCircle/photos/a.149722949063895/56333343
 
 ## USA
 * RDQ - JSON LD - https://www.racedayquads.com/sitemap.xml
-* GetFPV - JSON LD - NO SITEMAP
+* GetFPV - JSON LD - NO SITEMAP - Need to scrape https://www.getfpv.com/catalog/seo_sitemap/product/?p=[page no.]
 * Pyrodrone - Microdata - https://pyrodrone.com/sitemap.xml
 * heli-nation.com - Microdata - https://www.heli-nation.com/catalog/seo_sitemap/product
