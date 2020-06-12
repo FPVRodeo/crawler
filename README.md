@@ -9,6 +9,7 @@ Some SRCs https://www.facebook.com/DroneCircle/photos/a.149722949063895/56333343
 * HobbyRC - Microdata - https://www.hobbyrc.co.uk/sitemap.xml
 * UnmannedTech - JSON LD - https://www.unmannedtechshop.co.uk/image-sitemap-index-1.xml
 * MakeItBuildIt - Microdata - https://www.makeitbuildit.co.uk/sitemap.xml
+* Droneislife - JSON LD & Microdata - https://droneislife.co.uk/sitemap.xml
 * HobbyKing - Microdata (will need some extra jank) - HTML Sitemap https://hobbyking.com/en_us/catalog/seo_sitemap/product
 
 ## USA

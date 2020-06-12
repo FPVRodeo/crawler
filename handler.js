@@ -4,6 +4,8 @@ const HobbyRcCrawler = require('./crawlers/hobbyrc/crawler');
 const HobbyRcScraper = require('./crawlers/hobbyrc/scraper');
 const UmtCrawler = require('./crawlers/umt/crawler');
 const UmtScraper = require('./crawlers/umt/scraper');
+const DroneislifeCrawler = require('./crawlers/droneislife/crawler');
+const DroneislifeScraper = require('./crawlers/droneislife/scraper');
 
 // TODO: Break these to their own functions?
 
@@ -15,7 +17,37 @@ module.exports.crawl = (event, context, callback) => {
 
 };
 
-const UMTScrape = new UmtScraper();
+const DILScrape = new DroneislifeScraper();
+
+let DILTest = [
+    'https://droneislife.co.uk/fpv/video-transmitters/TBS-Unify-Pro-5G8-HV-Race-2',
+    'https://droneislife.co.uk/accessories/swag/ethix-black-cap',
+    'https://droneislife.co.uk/accessories/Ethix-Tempered-ND16-Filter',
+    'https://droneislife.co.uk/accessories/landingpads',
+].map((url) => {
+    return DILScrape.getProduct(url);
+});
+Promise.all(DILTest).then((data) => {
+    console.log(data);
+}).catch((error) => {
+    console.error('An Error has occurred');
+    console.error(error);
+});
+
+/*const DILCrawl = new DroneislifeCrawler();
+DILCrawl.fetchUrls().then((urls) => {
+
+    urls.forEach((url) => {
+        console.log(url);
+    });
+
+    console.log(`Total Urls ${urls.length}`);
+}).catch((error) => {
+    console.error('An Error has occurred');
+    console.error(error);
+});*/
+
+/*const UMTScrape = new UmtScraper();
 [
     'https://www.unmannedtechshop.co.uk/product/lumenier-micro-axii-stubby-mmcx-5-8ghz-antenna/?attribute_pa_antenna-polarisation=rhcp',
     'https://www.unmannedtechshop.co.uk/product/jumper-t16-plus-radio-transmitter/',
@@ -26,7 +58,7 @@ const UMTScrape = new UmtScraper();
        console.error('An Error has occurred') ;
        console.error(error);
     });
-});
+});*/
 /*const umt = new UmtCrawler();
 umt.fetchUrls().then((urls) => {
     urls.forEach((url) => {
