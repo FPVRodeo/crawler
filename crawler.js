@@ -1,6 +1,6 @@
 'use strict';
 
-const AWS = require('awssdk');
+const AWS = require('aws-sdk');
 
 const HobbyRcCrawler = require('./crawlers/hobbyrc/crawler');
 const UmtCrawler = require('./crawlers/umt/crawler');
@@ -10,7 +10,8 @@ module.exports.hobbyRcCrawl = async (event, context, callback) => {
    const hobbyrc = new HobbyRcCrawler();
 
     try {
-        let urls = await hobbyrc.fetchUrls();
+        // let urls = await hobbyrc.fetchUrls();
+        console.log('test');
 
 
     } catch (e) {
