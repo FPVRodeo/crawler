@@ -11,7 +11,8 @@ class DroneislifeScraper extends BaseScraper {
     async getProduct(url) {
         const product = new Product();
         const categoryMetadata = [];
-        const data = await this._scrapeUrl(url);
+        const dataStaging = await this._scrapeUrl(url);
+        const data = Array.isArray(dataStaging) ? dataStaging : [ dataStaging ];
 
         data.forEach((item) => {
             if (item['@type'] === 'BreadcrumbList') {
@@ -43,9 +44,12 @@ class DroneislifeScraper extends BaseScraper {
                 product.source = 'droneislife';
             }
         });
-        product.category_metadata = categoryMetadata;
 
-        return product;
+        if (categoryMetadata.length > 0) {
+            product.category_metadata = categoryMetadata;
+        }
+
+        return product.source === null ? null : product;
     }
 }
 
