@@ -49,6 +49,11 @@ aws4@^1.8.0:
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.10.0.tgz#a17b3a8ea811060e74d47d306122400ad4497ae2"
   integrity sha512-3YDiu347mtVtjpyV3u5kVqQLP242c06zwDOgpeRnybmXlYYsLbtTrUBUm8i8srONt+FWobl5aibnU1030PeeuA==
 
+awssdk@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/awssdk/-/awssdk-1.0.1.tgz#75628c311c3c390de0e09d84767710fe0212a2c7"
+  integrity sha512-gNJMwfBQe8LkPU5JSN11YEUYL1rHSnqOVzM0vY80PQguNzln0T5IdJKDKnBfrKyUNNujOfs7SHLmkdsdBRZ5fg==
+
 axios@^0.19.2:
   version "0.19.2"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.19.2.tgz#3ea36c5d8818d0d5f8a8a97a6d36b86cdc00cb27"
