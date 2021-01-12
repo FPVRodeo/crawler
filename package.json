@@ -5,10 +5,12 @@
   "main": "handler.js",
   "license": "MIT",
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.2.0",
     "@aws-sdk/client-sqs": "^3.2.0",
     "axios": "^0.19.2",
     "cheerio": "^1.0.0-rc.3",
     "fast-xml-parser": "^3.17.3",
-    "html-metadata": "^1.7.1"
+    "html-metadata": "^1.7.1",
+    "uuid": "^8.3.2"
   }
 }

@@ -9,6 +9,16 @@ provider:
   iamRoleStatements:
     - Effect: "Allow"
       Action:
+        - "s3:PutObject"
+      Resource:
+        Fn::Join:
+          - ''
+          - - Fn::GetAtt:
+              - "ScraperBucket"
+              - "Arn"
+            - '/*'
+    - Effect: "Allow"
+      Action:
         - "sqs:DeleteMessage"
         - "sqs:DeleteMessageBatch"
         - "sqs:SendMessageBatch"
@@ -20,6 +30,21 @@ provider:
           - "Arn"
 
 functions:
+  hobbyscrape:
+    handler: scraper.hobbyRcScrape
+    memorySize: 256
+    timeout: 900
+    reservedConcurrency: 1
+    events:
+      - sqs:
+          batchSize: 1
+          arn:
+            Fn::GetAtt:
+              - "HobbyRcQueue"
+              - "Arn"
+    environment:
+      SCRAPER_BUCKET:
+        Ref: ScraperBucket
   hobbycrawl:
     handler: crawler.hobbyRcCrawl
     memorySize: 256
@@ -30,10 +55,24 @@ functions:
 
 resources:
   Resources:
+    ScraperBucket:
+      Type: "AWS::S3::Bucket"
+      Properties:
+        BucketName:
+          Fn::Join:
+            - ''
+            - - 'fpv-rodeo-scraper-'
+              - !Ref 'AWS::AccountId'
+        PublicAccessBlockConfiguration:
+          BlockPublicAcls: 'true'
+          BlockPublicPolicy: 'true'
+          IgnorePublicAcls: 'true'
+          RestrictPublicBuckets: 'true'
     HobbyRcQueue:
       Type: "AWS::SQS::Queue"
       Properties:
-        QueueName: "HobbyRC"
+        QueueName: "HobbyRC-${opt:stage, self:provider.stage, 'dev'}"
+        VisibilityTimeout: 900
         RedrivePolicy:
           maxReceiveCount: "5"
           deadLetterTargetArn:
@@ -43,7 +82,7 @@ resources:
     HobbyRcDLQ:
       Type: "AWS::SQS::Queue"
       Properties:
-        QueueName: "HobbyRC-DLQ"
+        QueueName: "HobbyRC-${opt:stage, self:provider.stage, 'dev'}-DLQ"
   Outputs:
     HobbyRCQueueUrl:
       Description: "HobbyRC Queue URL"

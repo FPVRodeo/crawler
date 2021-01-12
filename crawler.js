@@ -1,6 +1,7 @@
 'use strict';
 
 const { SQSClient, SendMessageBatchCommand } = require('@aws-sdk/client-sqs');
+const { v4: uuidv4 } = require('uuid');
 
 const HobbyRcCrawler = require('./crawlers/hobbyrc/crawler');
 const UmtCrawler = require('./crawlers/umt/crawler');
@@ -9,14 +10,15 @@ const DroneislifeCrawler = require('./crawlers/droneislife/crawler');
 module.exports.hobbyRcCrawl = async (event, context) => {
    const hobbyrc = new HobbyRcCrawler();
    const sqs = new SQSClient({region: process.env.AWS_REGION});
+   const crawlID = uuidv4();
 
     try {
         let fetchUrls = await hobbyrc.fetchUrls();
 
-        let messages = fetchUrls.map((url, i) => {
+        let messages = fetchUrls.slice(200,300).map((url, i) => {
                 let msg = {};
                 msg.Id = `msg_${i}`;
-                msg.MessageBody = url.loc;
+                msg.MessageBody = JSON.stringify({"url": url.loc, "crawlID": crawlID});
                 return msg;
         });
 
