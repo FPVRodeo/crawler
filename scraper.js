@@ -14,7 +14,6 @@ module.exports.hobbyRcScrape = async (event, context) => {
         const { url, crawlID } = JSON.parse(record["body"]);
         console.log(`Getting ready to process: ${url} - ${crawlID}`);
 
-        // Check if already processed
         const s3 = new S3(process.env.AWS_REGION, process.env.SCRAPER_BUCKET);
 
         let page = [...url.matchAll(/^https:\/\/.*\/([a-z\-0-9]*)$/g)][0][1];
