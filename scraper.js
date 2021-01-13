@@ -10,6 +10,8 @@ module.exports.hobbyRcScrape = async (event, context) => {
         throw Error('Invalid Event Message');
     }
 
+    console.log(`Total Records pulled: `,event["Records"].length);
+
     try {
         const { url, crawlID } = JSON.parse(record["body"]);
         console.log(`Getting ready to process: ${url} - ${crawlID}`);

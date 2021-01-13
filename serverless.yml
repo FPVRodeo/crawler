@@ -34,7 +34,7 @@ functions:
   hobbyscrape:
     handler: scraper.hobbyRcScrape
     memorySize: 256
-    timeout: 900
+    timeout: 300
     reservedConcurrency: 1
     events:
       - sqs:
@@ -73,9 +73,9 @@ resources:
       Type: "AWS::SQS::Queue"
       Properties:
         QueueName: "HobbyRC-${opt:stage, self:provider.stage, 'dev'}"
-        VisibilityTimeout: 900
+        VisibilityTimeout: 300
         RedrivePolicy:
-          maxReceiveCount: "5"
+          maxReceiveCount: "10"
           deadLetterTargetArn:
             Fn::GetAtt:
               - "HobbyRcDLQ"
