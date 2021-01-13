@@ -18,7 +18,7 @@ module.exports.hobbyRcScrape = async (event, context) => {
 
         const s3 = new S3(process.env.AWS_REGION, process.env.SCRAPER_BUCKET);
 
-        let page = [...url.matchAll(/^https:\/\/.*\/([a-z\-0-9]*)$/g)][0][1];
+        let page = [...url.matchAll(/^https:\/\/.*\/([a-z\-0-9_]*)$/g)][0][1];
         let date = new Date();
         let s3Key = `HobbyRc/${date.getFullYear()}/${(date.getMonth()+1).toString().padStart(2,'0')}/${crawlID}/${page}.json`;
 
