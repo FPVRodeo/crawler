@@ -1,3 +1,8 @@
+# Place this in an empty directory and just run `docker compose up -d` For ease of use, keep an eye on Docker Desktop
+# Clicking on the running enterprisesearch container will display logs on the container, showing once the Web application and API is up and running. This might take upto 2mins (java application)
+# Login is enterprise_search / letmein1234
+# Once logged in, select "Launch App Search" and follow setup
+
 version: '3'
 services:
 

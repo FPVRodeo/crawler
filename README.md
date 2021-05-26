@@ -1,4 +1,26 @@
-crawler
+# Running Crawlers and Scrapers
+* Run `yarn`
+* Run locally via `handler.js` for now.
+* ???
+* PROFIT
+
+`crawler.js` and `scraper.js` are the serverless Lambda integrations of the
+respective crawler and scraper classes. These are managed by `serverless.yml`
+This will be thrown into a CI/CD solution at some point to auto-deploy to AWS.
+
+# Running ElasticSearch locally
+See notes inside `docker-compose.yml` that contains all the info you need to get it running
+locally.
+
+## Loading Elastic Search with records.
+There's an example inside `handler.js` using the hobbyrc scraper lines 101-117 (as of this commit).
+This just uses axios to POST to AppSearch Documents, Make sure to update the Auth header with your private-token from AppSearch.
+Will need to change the `localhost:3002` to reflect the `3123` port specified in `docker-compose.yml`
+
+## Notes / Todos
+* Still need to attach this repo to a CI/CD solution to auto deploy using serverless.
+* Currently been running locally using Node 12, need to confirm it works with Node 14.
+* Write a solution that updates elasticsearch once a scrape is complete. Can probably use S3 Events for this, i.e. trigger lambda function whenever new json file is added to S3, and post to ElasticSearch
 
 #FPV Rodio - Website Datatypes
 

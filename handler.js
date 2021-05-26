@@ -1,5 +1,8 @@
 'use strict';
-
+/*
+ * This covers the working crawlers and scrapers, which should run, if not we've got an issue and they need updating.
+ * Just uncomment the sections you want to play with.
+ */
 const HobbyRcCrawler = require('./crawlers/hobbyrc/crawler');
 const HobbyRcScraper = require('./crawlers/hobbyrc/scraper');
 const UmtCrawler = require('./crawlers/umt/crawler');
@@ -17,7 +20,7 @@ module.exports.crawl = (event, context, callback) => {
 
 };
 
-const DILScrape = new DroneislifeScraper();
+/*const DILScrape = new DroneislifeScraper();
 
 let DILTest = [
     'https://droneislife.co.uk/fpv/video-transmitters/TBS-Unify-Pro-5G8-HV-Race-2',
@@ -32,7 +35,7 @@ Promise.all(DILTest).then((data) => {
 }).catch((error) => {
     console.error('An Error has occurred');
     console.error(error);
-});
+});*/
 
 /*const DILCrawl = new DroneislifeCrawler();
 DILCrawl.fetchUrls().then((urls) => {
@@ -47,7 +50,7 @@ DILCrawl.fetchUrls().then((urls) => {
     console.error(error);
 });*/
 
-/*const UMTScrape = new UmtScraper();
+const UMTScrape = new UmtScraper();
 [
     'https://www.unmannedtechshop.co.uk/product/lumenier-micro-axii-stubby-mmcx-5-8ghz-antenna/?attribute_pa_antenna-polarisation=rhcp',
     'https://www.unmannedtechshop.co.uk/product/jumper-t16-plus-radio-transmitter/',
@@ -58,8 +61,8 @@ DILCrawl.fetchUrls().then((urls) => {
        console.error('An Error has occurred') ;
        console.error(error);
     });
-});*/
-/*const umt = new UmtCrawler();
+});
+const umt = new UmtCrawler();
 umt.fetchUrls().then((urls) => {
     urls.forEach((url) => {
        console.log(url);
@@ -69,7 +72,7 @@ umt.fetchUrls().then((urls) => {
 }).catch((error) => {
     console.error('An Error has occurred');
     console.error(error);
-});*/
+});
 
 /*const hobbyrc = new HobbyRcCrawler();
 hobbyrc.fetchUrls().then((urls) => {
