@@ -17,12 +17,17 @@ There's an example inside `handler.js` using the hobbyrc scraper lines 101-117 (
 This just uses axios to POST to AppSearch Documents, Make sure to update the Auth header with your private-token from AppSearch.
 Will need to change the `localhost:3002` to reflect the `3123` port specified in `docker-compose.yml`
 
+If you've already got a bunch of json files in a directory you can run the cheeky bash one-liner below, this will POST all files in the current directory to ElasticSearch. Just make sure to update the Auth header, search-engine-name, and potentially the host:port
+```
+find ./ -name '*' -type f -exec curl -s -XPOST -H 'Authorization: Bearer private-token' localhost:3123/api/as/v1/engines/search-engine-name/documents --data-binary @{} \;
+```
+
 ## Notes / Todos
 * Still need to attach this repo to a CI/CD solution to auto deploy using serverless.
 * Currently been running locally using Node 12, need to confirm it works with Node 14.
 * Write a solution that updates elasticsearch once a scrape is complete. Can probably use S3 Events for this, i.e. trigger lambda function whenever new json file is added to S3, and post to ElasticSearch
 
-#FPV Rodio - Website Datatypes
+# FPV Rodio - Website Datatypes
 
 ## UK
 Some SRCs https://www.facebook.com/DroneCircle/photos/a.149722949063895/563333437702842/?type=3&theater
