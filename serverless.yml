@@ -49,6 +49,21 @@ functions:
     environment:
       SCRAPER_BUCKET:
         Ref: ScraperBucket
+  umtscrape:
+    handler: scraper.umtScrape
+    memorySize: 256
+    timeout: 300
+    reservedConcurrency: 1
+    events:
+      - sqs:
+          batchSize: 1
+          arn:
+            Fn::GetAtt:
+              - "UmtQueue"
+              - "Arn"
+    environment:
+      SCRAPER_BUCKET:
+        Ref: ScraperBucket
   hobbycrawl:
     handler: crawler.hobbyRcCrawl
     memorySize: 256
