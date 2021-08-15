@@ -16,7 +16,7 @@ class HobbyRcCrawler extends BaseSitemapCrawler{
         }
          */
         const sitemap = await this._startCrawl(this.sitemap);
-        return sitemap.urlset.url;
+        return sitemap.urlset.url.map(url => url.loc);
     }
 }
 
