@@ -26,9 +26,12 @@ provider:
         - "sqs:ReceiveMessage"
         - "sqs:SendMessage"
       Resource:
-        Fn::GetAtt:
-          - "HobbyRcQueue"
-          - "Arn"
+        - Fn::GetAtt:
+            - "HobbyRcQueue"
+            - "Arn"
+        - Fn::GetAtt:
+            - "UmtQueue"
+            - "Arn"
 
 functions:
   hobbyscrape:
@@ -53,6 +56,13 @@ functions:
     environment:
       HOBBYRC_QUEUE:
         Ref: HobbyRcQueue
+  umtcrawl:
+    handler: crawler.umtCrawl
+    memorySize: 256
+    timeout: 900
+    environment:
+      UMT_QUEUE:
+        Ref: UmtQueue
 
 resources:
   Resources:
@@ -84,8 +94,27 @@ resources:
       Type: "AWS::SQS::Queue"
       Properties:
         QueueName: "HobbyRC-${opt:stage, self:provider.stage, 'dev'}-DLQ"
+    UmtQueue:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: "Umt-${opt:stage, self:provider.stage, 'dev'}"
+        VisibilityTimeout: 300
+        RedrivePolicy:
+          maxReceiveCount: "10"
+          deadLetterTargetArn:
+            Fn::GetAtt:
+              - "UmtDLQ"
+              - "Arn"
+    UmtDLQ:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: "Umt-${opt:stage, self:provider.stage, 'dev'}-DLQ"
   Outputs:
     HobbyRCQueueUrl:
       Description: "HobbyRC Queue URL"
       Value:
         Ref: "HobbyRcQueue"
+    UmtQueueUrl:
+      Description: "Umt Queue URL"
+      Value:
+        Ref: "UmtQueue"
