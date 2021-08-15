@@ -29,7 +29,7 @@ class DoCrawl {
             let messages = fetchUrls.map((url, i) => {
                 let msg = {};
                 msg.Id = `msg_${i}`;
-                msg.MessageBody = JSON.stringify({"url": url.loc, "crawlID": crawlID});
+                msg.MessageBody = JSON.stringify({"url": url, "crawlID": crawlID});
                 return msg;
             });
 
