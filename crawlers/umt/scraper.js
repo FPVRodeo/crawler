@@ -28,6 +28,7 @@ class UMTScraper extends BaseScraper {
 
             if (item['@type'] === 'Product') {
                 let price = item.offers.map((offer) => {
+                    console.log(offer);
                     return {
                         currency: offer.priceSpecification.priceCurrency,
                         price: Number(offer.priceSpecification.price.trim().replace(/[^0-9.]/g, '')),
