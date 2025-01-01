@@ -47,7 +47,7 @@ Some SRCs https://www.facebook.com/DroneCircle/photos/a.149722949063895/56333343
 
 # Athena JSON DDL
 
-## HobbRC
+## HobbyRC
 ```sql
 CREATE EXTERNAL TABLE `hobbyrc`(
   `name` string COMMENT 'from deserializer', 
